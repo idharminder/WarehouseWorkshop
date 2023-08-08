@@ -1,19 +1,19 @@
 namespace WarehouseWorkshop;
 
-public class Warehouse
+public class Basket
 {
   private Dictionary<string, int> Inventory { get; set; }
 
-  public Warehouse(Dictionary<string, int> inventory)
+  public Basket(Dictionary<string, int> inventory)
   {
     Inventory = inventory;
   }
-  public Warehouse()
+  public Basket()
   {
     Inventory = new Dictionary<string, int>();
   }
 
-  public void AddStock(Stock stock)
+  public void AddItems(Stock stock)
   {
     if (Inventory.ContainsKey(stock.Name))
     {
@@ -25,7 +25,7 @@ public class Warehouse
     }
   }
 
-  public void RemoveStock(Stock stock)
+  public void RemoveItems(Stock stock)
   {
     if (Inventory.ContainsKey(stock.Name) && Inventory[stock.Name]>stock.Quantity)
     {
@@ -33,12 +33,12 @@ public class Warehouse
     }
     else
     {
-      throw new InvalidOperationException("Insufficient Stock");
+      throw new InvalidOperationException("Insufficient Items");
     }
   }
 
-  public string ReportStockLevels(){
-    string report = "INVENTORY REPORT\nItem\t\tQuantity\n";
+  public string ReportBasketContent(){
+    string report = "Basket Contents\nItem\t\tQuantity\n";
     foreach (var item in Inventory)
     {
       report += $"\n{item.Key}\t\t{item.Value}";

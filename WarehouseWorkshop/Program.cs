@@ -12,15 +12,25 @@ var Pears20 = new Stock (Pear.Name, 20);
 var Pears10 = new Stock (Pear.Name, 10);
 var Lemons30 = new Stock (Lemon.Name, 30);
 
-var myWarehouse = new Warehouse();
 
-myWarehouse.AddStock(Apples10);
-myWarehouse.AddStock(Pears20);
-myWarehouse.AddStock(Lemons30);
+var myBasket = new Basket();
 
-Console.WriteLine(myWarehouse.ReportStockLevels());
+myBasket.AddItems(Pears10);
+myBasket.AddItems(Apples10);
 
-myWarehouse.RemoveStock(Pears10);
-// myWarehouse.RemoveStock(Pears20);
+Console.WriteLine(myBasket.ReportBasketContent());
 
-Console.WriteLine(myWarehouse.ReportStockLevels());
+
+
+// var myWarehouse = new Warehouse();
+
+// myWarehouse.AddStock(Apples10);
+// myWarehouse.AddStock(Pears20);
+// myWarehouse.AddStock(Lemons30);
+
+// Console.WriteLine(myWarehouse.ReportStockLevels());
+
+// myWarehouse.RemoveStock(Pears10);
+// // myWarehouse.RemoveStock(Pears20);
+
+// Console.WriteLine(myWarehouse.ReportStockLevels());
