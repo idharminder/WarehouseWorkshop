@@ -2,34 +2,36 @@ namespace WarehouseWorkshop;
 
 public class Basket
 {
-  private Dictionary<string, int> Inventory { get; set; }
-
-  public Basket(Dictionary<string, int> inventory)
-  {
-    Inventory = inventory;
+  public Dictionary<Item, int> Contents { get; set; }
+  public Prices Prices { get; set; }
+  public decimal TotalPrice { 
+    get{
+      return Contents.Sum(x => Prices.PriceList[x.Key.Id] * x.Value);
+    }
   }
-  public Basket()
+  public Basket(Prices prices)
   {
-    Inventory = new Dictionary<string, int>();
+    this.Prices = prices;
+    Contents = new Dictionary<Item, int>();
   }
 
   public void AddItems(Stock stock)
   {
-    if (Inventory.ContainsKey(stock.Name))
+    if (Contents.ContainsKey(stock.Item))
     {
-      Inventory[stock.Name] += stock.Quantity;
+      Contents[stock.Item] += stock.Quantity;
     }
     else
     {
-      Inventory.Add(stock.Name, stock.Quantity);
+      Contents.Add(stock.Item, stock.Quantity);
     }
   }
 
   public void RemoveItems(Stock stock)
   {
-    if (Inventory.ContainsKey(stock.Name) && Inventory[stock.Name]>stock.Quantity)
+    if (Contents.ContainsKey(stock.Item) && Contents[stock.Item]>stock.Quantity)
     {
-      Inventory[stock.Name] -= stock.Quantity;
+      Contents[stock.Item] -= stock.Quantity;
     }
     else
     {
@@ -38,10 +40,10 @@ public class Basket
   }
 
   public string ReportBasketContent(){
-    string report = "Basket Contents\nItem\t\tQuantity\n";
-    foreach (var item in Inventory)
+    string report = "\nBasket Contents\nItem\t\tQuantity\tUnit Price\n";
+    foreach (var item in Contents)
     {
-      report += $"\n{item.Key}\t\t{item.Value}";
+      report += $"\n{item.Key.Name}\t\t{item.Value}\t\t{Prices.PriceList[item.Key.Id]:C}";
     }
     return report+"\n";
   }

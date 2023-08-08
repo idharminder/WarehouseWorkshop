@@ -2,34 +2,34 @@ namespace WarehouseWorkshop;
 
 public class Warehouse
 {
-  private Dictionary<string, int> Inventory { get; set; }
+  public Dictionary<Item, int> Inventory { get; set; }
 
-  public Warehouse(Dictionary<string, int> inventory)
+  public Warehouse(Dictionary<Item, int> inventory)
   {
     Inventory = inventory;
   }
   public Warehouse()
   {
-    Inventory = new Dictionary<string, int>();
+    Inventory = new Dictionary<Item, int>();
   }
 
   public void AddStock(Stock stock)
   {
-    if (Inventory.ContainsKey(stock.Name))
+    if (Inventory.ContainsKey(stock.Item))
     {
-      Inventory[stock.Name] += stock.Quantity;
+      Inventory[stock.Item] += stock.Quantity;
     }
     else
     {
-      Inventory.Add(stock.Name, stock.Quantity);
+      Inventory.Add(stock.Item, stock.Quantity);
     }
   }
 
   public void RemoveStock(Stock stock)
   {
-    if (Inventory.ContainsKey(stock.Name) && Inventory[stock.Name]>stock.Quantity)
+    if (Inventory.ContainsKey(stock.Item) && Inventory[stock.Item]>stock.Quantity)
     {
-      Inventory[stock.Name] -= stock.Quantity;
+      Inventory[stock.Item] -= stock.Quantity;
     }
     else
     {

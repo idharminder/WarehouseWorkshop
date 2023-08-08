@@ -3,11 +3,11 @@ namespace WarehouseWorkshop;
 public class Item
 {
     public string Name { get; set; }
-    public decimal Price { get; set; }
+    public string Id { get; set; }
 
-    public Item(string name, decimal price)
+    public Item(string name, string id)
     {
         Name = name;
-        Price = price;
+        Id = id;
     }
 }

@@ -2,12 +2,12 @@ namespace WarehouseWorkshop;
 
 public class Stock
 {
-  public string Name { get; set; }
+  public Item Item { get; set; }
   public int Quantity { get; set; }
 
-  public Stock(string name, int quantity)
+  public Stock(Item item, int quantity)
   {
-    Name = name;
+    Item = item;
     Quantity = quantity;
   }
 }
