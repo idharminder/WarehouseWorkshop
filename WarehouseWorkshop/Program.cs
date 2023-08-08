@@ -5,38 +5,31 @@ var Pear =  new Item ("pears", "2");
 var Lemon =  new Item ("lemons", "3");
 
 
-// var Apples10 = new Stock (Apple, 10);
-// var Pears20 = new Stock (Pear, 20);
-// var Pears10 = new Stock (Pear, 10);
-// var Lemons30 = new Stock (Lemon, 30);
+var ApplesPallet100 = new Stock (Apple, 100);
+var PearsPallet200 = new Stock (Pear, 200);
+var LemonsPallet300 = new Stock (Lemon, 300);
 
-var Apples2 = new Stock (Apple, 2);
-var Pears1 = new Stock (Pear, 1);
-var Lemons3 = new Stock (Lemon, 3);
+var ApplesSelected1 = new Stock (Apple, 1);
+var PearsSelected2 = new Stock (Pear, 2);
+var LemonsSelected3 = new Stock (Lemon, 3);
 
 
+var myWarehouse = new Warehouse();
 var myPrices = new Prices();
-var myBasket = new Basket(myPrices);
+var myBasket = new Basket(myPrices, myWarehouse);
 
-myBasket.AddItems(Pears1);
-myBasket.AddItems(Apples2);
-myBasket.AddItems(Lemons3);
+
+myWarehouse.AddStock(ApplesPallet100);
+myWarehouse.AddStock(PearsPallet200);
+myWarehouse.AddStock(LemonsPallet300);
+
+Console.WriteLine(myWarehouse.ReportStockLevels());
+
+myBasket.AddItems(ApplesSelected1);
+myBasket.AddItems(PearsSelected2);
+myBasket.AddItems(LemonsSelected3);
 
 Console.WriteLine(myBasket.ReportBasketContent());
-
 Console.WriteLine($"Total Basket Price {myBasket.TotalPrice:C}\n");
 
-
-
-// var myWarehouse = new Warehouse();
-
-// myWarehouse.AddStock(Apples10);
-// myWarehouse.AddStock(Pears20);
-// myWarehouse.AddStock(Lemons30);
-
-// Console.WriteLine(myWarehouse.ReportStockLevels());
-
-// myWarehouse.RemoveStock(Pears10);
-// // myWarehouse.RemoveStock(Pears20);
-
-// Console.WriteLine(myWarehouse.ReportStockLevels());
+Console.WriteLine(myWarehouse.ReportStockLevels());

@@ -41,7 +41,7 @@ public class Warehouse
     string report = "INVENTORY REPORT\nItem\t\tQuantity\n";
     foreach (var item in Inventory)
     {
-      report += $"\n{item.Key}\t\t{item.Value}";
+      report += $"\n{item.Key.Name}\t\t{item.Value}";
     }
     return report+"\n";
   }
