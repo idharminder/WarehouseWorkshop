@@ -2,28 +2,47 @@ namespace WarehouseWorkshop;
 
 public class Warehouse
 {
-    public List<Stock> Stocks { get; set; }
+  private Dictionary<string, int> Inventory { get; set; }
 
-    public Warehouse(List<Stock> stocks)
+  public Warehouse(Dictionary<string, int> inventory)
+  {
+    Inventory = inventory;
+  }
+  public Warehouse()
+  {
+    Inventory = new Dictionary<string, int>();
+  }
+
+  public void AddStock(Stock stock)
+  {
+    if (Inventory.ContainsKey(stock.Name))
     {
-        Stocks = stocks;
+      Inventory[stock.Name] += stock.Quantity;
     }
-
-    public void AddStock(Stock stock)
+    else
     {
-        if (Stocks.Exists(x => x.Item.Name == stock.Item.Name))
-        {
-            Stocks.Find(x => x.Item.Name == stock.Item.Name).Quantity += stock.Quantity;
-        }
-        else
-        {
-            Stocks.Add(stock);
-        }
+      Inventory.Add(stock.Name, stock.Quantity);
     }
+  }
 
-    public string ReportInventory(){
-        return "stub for inventory report";
+  public void RemoveStock(Stock stock)
+  {
+    if (Inventory.ContainsKey(stock.Name) && Inventory[stock.Name]>stock.Quantity)
+    {
+      Inventory[stock.Name] -= stock.Quantity;
     }
+    else
+    {
+      throw new InvalidOperationException("Insufficient Stock");
+    }
+  }
 
-
+  public string ReportStockLevels(){
+    string report = "Item\t\tQuantity\n";
+    foreach (var item in Inventory)
+    {
+      report += $"\n{item.Key}\t\t{item.Value}";
+    }
+    return report+"\n";
+  }
 }
